@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ pet_type.capitalize() }} Adoption</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        {% if pet_type == 'cats' %}
+            body {
+                background-image: url("{{ url_for('static', filename='cat.jpg') }}");
+                background-size: cover;
+                color: #fff; /* Text color to be seen properly */
+            }
+        {% elif pet_type == 'dogs' %}
+            body {
+                background-image: url("{{ url_for('static', filename='dog.jpg') }}");
+                background-size: cover;
+                color: #333; /* Default text color */
+            }
+        {% elif pet_type == 'birds' %}
+            body {
+                background-image: url("{{ url_for('static', filename='bird.jpg') }}");
+                background-size: cover;
+                color: #333; /* Default text color */
+            }
+        {% elif pet_type == 'hamsters' %}
+            body {
+                background-image: url("{{ url_for('static', filename='hamster.jpg') }}");
+                background-size: cover;
+                color: #fff; /* Text color to be seen properly */
+            }
+        {% endif %}
+        /* Additional style for pet images */
+        .pet-image {
+            width: 140px; /* Adjust image width as needed */
+            height: 120px; /* Maintain aspect ratio */
+        }
+        h1{
+           margin-top: 30px;
+       }
+    </style>
+</head>
+<body>
+    <h1>{{ pet_type.capitalize() }} Adoption</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Breed</th>
+                <th>Age</th>
+                <th>Location</th>
+                <th>Photo</th> 
+                <th>Action</th> 
+            </tr>
+        </thead>
+        <tbody>
+            {% for pet in pets %}
+            <tr>
+                <td>{{ pet.name }}</td>
+                <td>{{ pet.breed }}</td>
+                <td>{{ pet.age }}</td>
+                <td>{{ pet.location }}</td>
+                <!-- Pet photo -->
+                <td><img src="{{ url_for('static', filename=pet.photo) }}" alt="{{ pet.name }} Photo" class="pet-image"></td> 
+                <!-- Adopt link -->
+                <td><a href="#" onclick="showPopup('{{ pet.name }}', '{{ pet.breed }}', '{{ pet.age }}')" class="adopt-link">Adopt</a></td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('home') }}">Back to Home</a>
+
+    <script>
+        function showPopup(name, breed, age) {
+            alert(`Adoption request received for ${name} (${breed}), ${age} years old. The contact details and details to adopt are sent to your email.`);
+        }
+    </script>
+</body>
+</html>
