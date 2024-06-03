@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pet Adoption</title>
+<link rel="stylesheet" type="text/css" href="styles.css">
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #fefbfb00;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 100vh;
+}
+
+.text-container {
+    flex: 1;
+    padding: 20px;
+    color: #00ff00b0;
+    font-family: italics;
+}
+
+.text-container h1 {
+    font-size: 65px;
+    margin-top: 180px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.image-container {
+    flex: 2;
+    background-image: url("{{ url_for('static', filename='hom.jpg') }}");
+    background-size: cover;
+    background-position: center top;
+    border-radius: 35% 0 0 35%;
+}
+
+.button-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.button-container a {
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    color: white;
+    background-color: #39FF14;
+    border-radius: 5px;
+}
+
+.button-container a:hover {
+    background-color: #00FF00;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="text-container">
+    <h1>Welcome to Pet Adoption</h1>
+    <div class="button-container">
+    <a href="{{ url_for('seller') }}">Seller</a>
+    <a href="{{ url_for('home') }}">Adopter</a>
+</div>
+  </div>
+  <div class="image-container"></div>
+</div>
+</body>
+</html>

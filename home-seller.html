@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Seller</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      background-image: url("{{ url_for('static', filename='image1.jpg') }}");
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+        }
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            padding: 25px;
+            border-radius: 5px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+          }
+        .form-container label {
+            font-weight: bold;
+            font-size: 22px;
+            color: dark slategray;
+          }
+
+        .form-container input, .form-container select {
+            padding: 7px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-container button {
+            padding: 7px 15px;
+            font-size: 26px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <label for="pet-type">Pet Type:</label>
+        <select id="pet-type">
+            <option value="cat">Cat</option>
+            <option value="dog">Dog</option>
+            <option value="bird">Bird</option>
+            <option value="hamster">Hamster</option>
+        </select>
+        <label for="pet-name">Name:</label>
+        <input type="text" id="pet-name" placeholder="Enter pet's name">
+        <label for="pet-age">Age:</label>
+        <input type="number" id="pet-age" placeholder="Enter pet's age">
+        <label for="pet-location">Location:</label>
+        <input type="text" id="pet-location" placeholder="Enter location">
+        <label for="contact-details">Contact Details:</label>
+        <input type="text" id="contact-details" placeholder="Enter Contact details">
+        <div class="gender-options">
+        <input type="radio" id="male" name="pet-gender" value="male">
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="pet-gender" value="female">
+        <label for="female">Female</label>
+        <input type="radio" id="other" name="pet-gender" value="other">
+        <label for="other">Other</label>
+    </div>
+    <button id="submit-button">Submit</button>
+</div>
+
+    <script>
+        document.getElementById('submit-button').addEventListener('click', function(event) {
+            event.preventDefault();
+            
+            var petType = document.getElementById('pet-type').value;
+            var petName = document.getElementById('pet-name').value;
+            var petAge = document.getElementById('pet-age').value;
+            var petLocation = document.getElementById('pet-location').value;
+            var petLicense= document.getElementById('pet-license').value;
+
+            if (petType && petName && petAge && petLocation&&petLicense) {
+                // Simulate form submission and show popup
+                fetch('/submit_pet', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        pet_type: petType,
+                        pet_name: petName,
+                        pet_age: petAge,
+                        pet_location: petLocation
+                        pet_license: petLicense
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                })
+                .catch(error => console.error('Error:', error));
+            } else {
+                alert('Please fill out all fields.');
+            }
+        });
+    </script>
+</body>
+</html>

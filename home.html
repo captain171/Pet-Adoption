@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Adoption</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fefbfb00;
+            background-image: url("{{ url_for('static', filename='home.jpg') }}");
+            background-size: cover;
+            background-position: center top;
+        }
+        h1 {
+            text-align: center;
+            font-size: 65px;
+            margin-top: 100px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            color: transparent;
+            background-image: linear-gradient(45deg, #00FF00, #51ff00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            font-style: italic;
+        }
+        nav ul li a {
+            font-size: 25px;
+            font-weight: bold;
+            color: #00FF00; /* Change the color of the li tags here */
+        }
+        form {
+            margin-top: 50px; /* Adjust form margin as needed */
+            text-align: center; /* Center the form */
+            background-color: aliceblue;
+        }
+    </style>
+    
+    
+</head>
+<body>
+    <h1>Pet Adoption</h1>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('signup') }}">Signup</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+        </ul>
+    </nav>
+    <br>
+    <form action="{{ url_for('adopt') }}" method="post">
+        <label for="pet_type">Choose a pet type:</label>
+        <select id="pet_type" name="pet_type">
+            <option value="cats">Cat</option>
+            <option value="dogs">Dog</option>
+            <option value="birds">Bird</option>
+            <option value="hamsters">Hamster</option>
+        </select>
+        <br>
+        <input type="submit" value="Submit">
+    </form>    
+</body>
+</html>
+
+
+
